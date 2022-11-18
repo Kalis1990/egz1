@@ -19,15 +19,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {   
-        $address = ['1 Montgomery Road, Widnes,WA8 8EG',
-        '1 Evenwood Close, Runcorn,WA7 1SH',
-        '64A Church Street, Warrington,WA1 2SY',
-        '65 Wellington Road, Timperley,WA15 7RH',
-        '14 Brackley Street, Runcorn ,WA7 1EQ',
-        '59 High Street ABERDEEN AB5 0TA',
-        '66 The Green BOURNEMOUTH BH54 3LE',
-        '50 The Drive, Isleworth , TW4 7AD',
-        '18 High Street, Slough ,SL1 1EQ'];
+        $release = ['2001/01/20',
+        '2007/10/03',
+        '1750/09/01',
+        '1670/04/28',
+        '2002/05/15',
+        '1991/07/02',
+        '1901/02/10',
+        '1871/02/20',
+        '2001/01/20'];
         $time = Carbon::now();
         DB::table('users')->insert([
             'name' => 'User',
@@ -46,32 +46,36 @@ class DatabaseSeeder extends Seeder
             'role' => 10
         ]);
        
-        foreach(['PizzaHut', 'Fat Buddy', 'Eat', 'Food Factory', 'Chili Pizza']as $cat){
-            DB::table('restaurants')->insert([
+        foreach(['Charles Dickens',
+        'Adam Mickiewicz',
+        'Grzegorz Brzeszczyszkiewicz',
+        'Briedis Miskelis', 
+        'Bram Stocker']as $cat){
+            DB::table('authors')->insert([
             'title' => $cat,
-            'address' => Arr::random($address),
             'created_at' => $time->addSeconds(1),
             'updated_at' => $time
             ]);
         }
         foreach([
-            'Spaghetti Bolonese', 
-            'Pizza Capricciosa',
-            'Kiev Balls', 
-            'Classic Chili',
-            'Chicken Soup', 
-            'Chocolate Cake',
-            'Spicy Chicken Wings', 
-            'Spicy Pork Ribs',
-            'BBQ Pork Ribs', 
-            'Pizza Cheessy',
-            'Chilli Soup', 
-            'Fresh Vegetable Salat'
-            ]as $meal){
-            DB::table('meals')->insert([
-            'title' => $meal,
+            'Black', 
+            'Transformers',
+            'Lord of Rings', 
+            'True Story',
+            'Little Nancy', 
+            'Chrismas Carol',
+            'Law and Order', 
+            'Oblivion',
+            'Witcher', 
+            'Home of Dragon',
+            'The Story of Benjamin Button', 
+            'Moon'
+            ]as $book){
+            DB::table('books')->insert([
+            'title' => $book,
+            'release' => Arr::random($release),
             'Price' => rand(100, 1000)/100,
-            'restaurant_id' => rand(1, 5),
+            'author_id' => rand(1, 5),
             'created_at' => $time->addSeconds(1),
             'updated_at' => $time
             ]);

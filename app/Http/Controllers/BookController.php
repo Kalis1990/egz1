@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Meal;
-use App\Models\Restaurant;
-use App\Models\MealImage;
+use App\Models\Book;
+use App\Models\Author;
+use App\Models\BookImage;
 use Illuminate\Http\Request;
 
 
-class MealController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class MealController extends Controller
      */
     public function index()
     {
-        return view('meal.index', [
-            'meals' => Meal::orderBy('updated_at', 'desc')->get(),
+        return view('book.index', [
+            'books' => Book::orderBy('updated_at', 'desc')->get(),
         ]);
     }
 
@@ -29,8 +29,8 @@ class MealController extends Controller
      */
     public function create()
     {
-        return view('meal.create', [
-            'restaurants' => Restaurant::orderBy('updated_at', 'desc')->get(),
+        return view('book.create', [
+            'authors' => Author::orderBy('updated_at', 'desc')->get(),
         ]);
     }
 
@@ -42,39 +42,45 @@ class MealController extends Controller
      */
     public function store(Request $request)
     {
-        Meal::create([
+        Book::create([
             'title' => $request->title,
             'price' => $request->price,
-            'restaurant_id' => $request->restaurant_id
+            'author_id' => $request->author_id
         ])->addImages($request->file('photo'));
         
-        return redirect()->route('m_index');
+        return redirect()->route('b_index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Meal  $meal
+     * @param  \App\Models\book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Meal $meal)
+    public function show(Book $book)
     {
-        return view('meal.show', [
-            'meal' => $meal,
+        return view('book.show', [
+            'book' => $book,
+        ]);
+    }
+    public function reserve(Book $book)
+    {
+        return view('book.reserve', [
+            'book' => $book,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Meal  $meal
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Meal $meal)
+    public function edit(Book $book)
     {
-        return view('meal.edit', [
-            'meal' => $meal,
-            'restaurants' => restaurant::orderBy('updated_at', 'desc')->get(),
+        return view('book.edit', [
+            'book' => $book,
+            'authors' => Author::orderBy('updated_at', 'desc')->get(),
         ]);
     }
 
@@ -82,38 +88,38 @@ class MealController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request;  $request
-     * @param  \App\Models\Meal  $meal
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Meal $meal)
+    public function update(Request $request, Book $book)
     {
-        $meal
+        $book
         ->update([
             'title' => $request->title,
             'price' => $request->price,
-            'restaurant_id' => $request->restaurant_id
+            'author_id' => $request->author_id
         ]);
-        $meal
+        $book
         ->removeImages($request->delete_photo)
         ->addImages($request->file('photo'));
 
-        return redirect()->route('m_index');
+        return redirect()->route('b_index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Meal  $meal
+     * @param  \App\Models\book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Meal $meal)
+    public function destroy(Book $book)
     {
 
-        if($meal->getPhotos()->count()){
-            $delIds = $meal->getPhotos()->pluck('id')->all();
-            $meal->removeImages($delIds);
+        if($book->getPhotos()->count()){
+            $delIds = $book->getPhotos()->pluck('id')->all();
+            $book->removeImages($delIds);
         }
-        $meal->delete();
-        return redirect()->route('m_index');
+        $book->delete();
+        return redirect()->route('b_index');
     }
 }

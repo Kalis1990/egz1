@@ -6,26 +6,26 @@
         <div class="col-5">
             <div class="card">
                 <div class="card-header">
-                    <h2>Edit restaurant</h2>
+                    <h2>Edit Author</h2>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('r_edit', $restaurant)}}" method="post">
+                    <form action="{{route('a_edit', $author)}}" method="post">
                         <div class="input-group mb-3">
                             <span class="input-group-text">Title</span>
-                            <input type="text" name="title" class="form-control" value={{old('title', $restaurant->title)}}>
+                            <input type="text" name="title" class="form-control" value={{old('title', $author->title)}}>
                         </div>
-                        <div class="input-group mb-3">
+                        {{-- <div class="input-group mb-3">
                             <span class="input-group-text">Address</span>
-                            <input type="text" name="address" class="form-control" value="{{old('address', $restaurant->address)}}">
+                            <input type="text" name="address" class="form-control" value="{{old('address', $author->address)}}">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">City</span>
-                            <input type="text" name="city" class="form-control" value="{{old('address', $restaurant->city)}}">
+                            <input type="text" name="city" class="form-control" value="{{old('address', $author->city)}}">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">Working Hours</span>
-                            <input type="text" name="hours" class="form-control" value="{{old('address', $restaurant->hours)}}">
-                        </div>
+                            <input type="text" name="hours" class="form-control" value="{{old('address', $author->hours)}}">
+                        </div> --}}
 
                         @csrf
                         @method('put')

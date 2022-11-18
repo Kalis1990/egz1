@@ -22,7 +22,7 @@
             
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                   <h1>Rate It</h1>
+                   <h1>World of Books</h1>
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -53,14 +53,14 @@
                         @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Restaurant
+                                Author
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('r_index') }}">
+                                <a class="dropdown-item" href="{{ route('a_index') }}">
                                     List
                                 </a>
                                  @if(Auth::user()->role >= 10)
-                                <a class="dropdown-item" href="{{ route('r_create') }}">
+                                <a class="dropdown-item" href="{{ route('a_create') }}">
                                     Add
                                 </a>
                                 @endif
@@ -68,15 +68,15 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Menu
+                                Books
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('m_index') }}">
+                                <a class="dropdown-item" href="{{ route('b_index') }}">
                                     List
                                 </a>
                                 @if(Auth::user()->role >= 10)
-                                <a class="dropdown-item" href="{{ route('m_create') }}">
-                                    Add Meal
+                                <a class="dropdown-item" href="{{ route('b_create') }}">
+                                    Add book
                                 </a>
                                 @endif
                             </div>

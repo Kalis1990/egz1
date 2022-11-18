@@ -6,8 +6,8 @@
         <div class="col-10">
             <div class="card">
                 <div class="card-header">
-                    <h2>Meals</h2>
-                    <form action="{{route('m_index')}}" method="get">
+                    <h2>Books</h2>
+                    <form action="{{route('b_index')}}" method="get">
                         <div class="container">
                             <div class="row">
                                 <div class="col-5">
@@ -42,27 +42,31 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        @forelse($meals as $meal)
+                        @forelse($books as $book)
                         <li class="list-group-item">
                             <div class="movies-list">
                                 <div class="content">
-                                    <h2><span>Title: </span>{{$meal->title}}</h2>
-                                    <h4><span>Price: </span>{{$meal->price}}</h4>
-                                    <h5>
-                                        <span>Restaurant: </span>
-                                        <a href="{{route('r_show', $meal->getRestaurant->id)}}">
-                                            {{$meal->getRestaurant->title}}
-                                        </a>
-                                    </h5>
-                                    @if($meal->getPhotos()->count())
-                                    <h5><a href="{{$meal->lastImageUrl()}}"><img src="{{$meal->lastImageUrl()}}" alt="pic" width="60" height="50" target="_BLANK">Photos: [{{$meal->getPhotos()->count()}}]</a></h5>
+                                    @if($book->getPhotos()->count())
+                                    {{-- <h5><a href="{{$book->lastImageUrl()}}"><img src="{{$book->lastImageUrl()}}" alt="pic" width="60" height="50" target="_BLANK">Photos: [{{$book->getPhotos()->count()}}]</a></h5> --}}
+                                    <h5><a href="{{$book->lastImageUrl()}}"><img src="{{$book->lastImageUrl()}}" alt="pic" width="60" height="50" target="_BLANK"></a></h5>
                                     @endif
+                                    <h2><span>Title: </span>{{$book->title}}</h2>  
+                                    {{-- <h4><span>Price: </span>{{$book->price}}</h4>
+                                    <h4><span>Release: </span>{{$book->release}}</h4> --}}
+                                    {{-- <h5>
+                                        <span>Author: </span>
+                                        <a href="{{route('a_show', $book->getAuthor->id)}}">
+                                            {{$book->getAuthor->title}}
+                                        </a>
+                                    </h5> --}}
+                                  
                                 </div>
                                 <div class="buttons">
-                                    <a href="{{route('m_show', $meal)}}" class="btn btn-info">Show</a>
+                                    <a href="{{route('b_show', $book)}}" class="btn btn-info">Show</a>
+                                    {{-- <a href="{{route('b_reserve', $book)}}" class="btn btn-red">Reserve</a> --}}
                                     @if(Auth::user()->role >= 10)
-                                    <a href="{{route('m_edit', $meal)}}" class="btn btn-success">Edit</a>
-                                    <form action="{{route('m_delete', $meal)}}" method="post">
+                                    <a href="{{route('b_edit', $book)}}" class="btn btn-success">Edit</a>
+                                    <form action="{{route('b_delete', $book)}}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -72,12 +76,12 @@
                             </div>
                         </li>
                         @empty
-                        <li class="list-group-item">No meals found</li>
+                        <li class="list-group-item">No books found</li>
                         @endforelse
                     </ul>
                 </div>
                 <div class="me-3 mx-3">
-                    {{-- {{ $meals->links() }} --}}
+                    {{-- {{ $books->links() }} --}}
                 </div>
             </div>
         </div>

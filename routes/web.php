@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RestaurantController as R;
-use App\Http\Controllers\MealController as M;
+use App\Http\Controllers\AuthorController as A;
+use App\Http\Controllers\BookController as B;
 use App\Http\Controllers\HomeController as H;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,25 +19,25 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', [H::class, 'homeList'])->name('home')->middleware('gate:home');
-Route::put('/rate/{movie}', [H::class, 'rate'])->name('rate')->middleware('gate:user');
+Route::put('/rate/{book}', [H::class, 'rate'])->name('rate')->middleware('gate:user');
 
-Route::prefix('restaurant')->name('r_')->group(function () {
-    Route::get('/', [R::class, 'index'])->name('index')->middleware('gate:user');
-    Route::get('/create', [R::class, 'create'])->name('create')->middleware('gate:admin');
-    Route::post('/create', [R::class, 'store'])->name('store')->middleware('gate:admin');
-    Route::get('/show/{restaurant}', [R::class, 'show'])->name('show')->middleware('gate:user');
-    Route::delete('/delete/{restaurant}', [R::class, 'destroy'])->name('delete')->middleware('gate:admin');
-    Route::get('/edit/{restaurant}', [R::class, 'edit'])->name('edit')->middleware('gate:admin');
-    Route::put('/edit/{restaurant}', [R::class, 'update'])->name('update')->middleware('gate:admin');
-    Route::delete('/delete-meals/{restaurant}', [R::class, 'destroyAll'])->name('delete_meals')->middleware('gate:admin');
+Route::prefix('author')->name('a_')->group(function () {
+    Route::get('/', [A::class, 'index'])->name('index')->middleware('gate:user');
+    Route::get('/create', [A::class, 'create'])->name('create')->middleware('gate:admin');
+    Route::post('/create', [A::class, 'store'])->name('store')->middleware('gate:admin');
+    Route::get('/show/{author}', [A::class, 'show'])->name('show')->middleware('gate:user');
+    Route::delete('/delete/{author}', [A::class, 'destroy'])->name('delete')->middleware('gate:admin');
+    Route::get('/edit/{author}', [A::class, 'edit'])->name('edit')->middleware('gate:admin');
+    Route::put('/edit/{author}', [A::class, 'update'])->name('update')->middleware('gate:admin');
+    Route::delete('/delete-books/{author}', [A::class, 'destroyAll'])->name('delete_books')->middleware('gate:admin');
 });
 
-Route::prefix('meal')->name('m_')->group(function () {
-    Route::get('/', [M::class, 'index'])->name('index')->middleware('gate:user');
-    Route::get('/create', [M::class, 'create'])->name('create')->middleware('gate:admin');
-    Route::post('/create', [M::class, 'store'])->name('store')->middleware('gate:admin');
-    Route::get('/show/{meal}', [M::class, 'show'])->name('show')->middleware('gate:user');
-    Route::delete('/delete/{meal}', [M::class, 'destroy'])->name('delete')->middleware('gate:admin');
-    Route::get('/edit/{meal}', [M::class, 'edit'])->name('edit')->middleware('gate:admin');
-    Route::put('/edit/{meal}', [M::class, 'update'])->name('update')->middleware('gate:admin');
+Route::prefix('book')->name('b_')->group(function () {
+    Route::get('/', [B::class, 'index'])->name('index')->middleware('gate:user');
+    Route::get('/create', [B::class, 'create'])->name('create')->middleware('gate:admin');
+    Route::post('/create', [B::class, 'store'])->name('store')->middleware('gate:admin');
+    Route::get('/show/{book}', [B::class, 'show'])->name('show')->middleware('gate:user');
+    Route::delete('/delete/{book}', [B::class, 'destroy'])->name('delete')->middleware('gate:admin');
+    Route::get('/edit/{book}', [B::class, 'edit'])->name('edit')->middleware('gate:admin');
+    Route::put('/edit/{book}', [B::class, 'update'])->name('update')->middleware('gate:admin');
 });

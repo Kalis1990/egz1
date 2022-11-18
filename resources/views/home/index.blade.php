@@ -6,7 +6,7 @@
         <div class="col-12 p-0 mb-2">
             <div class="card">
                 <div class="card-header">
-                    <h2>Meals Rating</h2>
+                    <h2>Book list</h2>
                     <div class="container">
                         <div class="row">
                             <div class="col-7">
@@ -16,8 +16,8 @@
                                             <div class="col-5">
                                                 <select name="cat" class="form-select mt-1">
                                                     <option value="0">All</option>
-                                                    @foreach($restaurants as $restaurant)
-                                                    <option value="{{$restaurant->id}}" @if($cat==$restaurant->id) selected @endif>{{$restaurant->title}}</option>
+                                                    @foreach($authors as $author)
+                                                    <option value="{{$author->id}}" @if($cat==$author->id) selected @endif>{{$author->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -64,25 +64,25 @@
         </div>
         <div class="card-body">
             <ul class="list-group">
-                @forelse($meals as $meal)
+                @forelse($books as $book)
                 <li class="list-group-item">
                     <div class="movies-list">
                         <div class="content">
-                            <h2><span>Title: </span>{{$meal->title}}</h2>
-                            <h4><span>Price: </span>{{$meal->price}}</h4>
+                            <h2><span>Title: </span>{{$book->title}}</h2>
+                            <h4><span>Price: </span>{{$book->price}}</h4>
                             <h5>
-                                <span>Restaurant: </span>
-                                <a href="{{route('r_show', $meal->getRestaurant->id)}}">
-                                    {{$meal->getRestaurant->title}}
+                                <span>author: </span>
+                                <a href="{{route('a_show', $book->getauthor->id)}}">
+                                    {{$book->getauthor->title}}
                                 </a>
                             </h5>
-                            @if($meal->getPhotos()->count())
-                            <h5><a href="{{$meal->lastImageUrl()}}" target="_BLANK">Photos: {{$meal->getPhotos()->count()}}</a></h5>
+                            @if($book->getPhotos()->count())
+                            <h5><a href="{{$book->lastImageUrl()}}" target="_BLANK">Photos: {{$book->getPhotos()->count()}}</a></h5>
                             @endif
-                            <h4><span>Rating: </span>{{$meal->rating ?? 'no rating'}}</h4>
+                            <h4><span>Rating: </span>{{$book->rating ?? 'no rating'}}</h4>
                         </div>
                         <div class="buttons">
-                            <form action="{{route('rate', $meal)}}" method="post">
+                            <form action="{{route('rate', $book)}}" method="post">
                                 <select name="rate">
                                     @foreach(range(1, 10) as $value)
                                     <option value="{{$value}}">{{$value}}</option>
@@ -96,7 +96,7 @@
                     </div>
                 </li>
                 @empty
-                <li class="list-group-item">No meals found</li>
+                <li class="list-group-item">No books found</li>
                 @endforelse
             </ul>
         </div>

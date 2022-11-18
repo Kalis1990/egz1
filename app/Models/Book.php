@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Meal extends Model
+class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'price', 'restaurant_id'];
+    protected $fillable = ['title', 'price', 'author_id'];
 
     const SORT_SELECT= [
         ['rate_asc', 'Rating 1 - 9'],
@@ -20,14 +20,14 @@ class Meal extends Model
         ['price_asc', 'Price Low to High'],
         ['price_desc', 'Price High to Low'],
     ];
-    public function getRestaurant()
+    public function getAuthor()
     {
-        return $this->belongsTo(Restaurant::class, 'restaurant_id', 'id');
+        return $this->belongsTo(Author::class, 'author_id', 'id');
     }
 
     public function getPhotos()
     {
-        return $this->hasMany(MealImage::class, 'meal_id', 'id');
+        return $this->hasMany(BookImage::class, 'book_id', 'id');
     }
 
     public function lastImageUrl()
@@ -38,7 +38,7 @@ class Meal extends Model
     public function addImages(?array $photos): self
     {
         if ($photos) {
-            $mealImage = [];
+            $bookImage = [];
             $time = Carbon::now();
             foreach ($photos as $photo) {
                 $ext = $photo->getClientOriginalExtension();
@@ -48,28 +48,28 @@ class Meal extends Model
                 // $Image->save(public_path().'/images/'.$file);
                 $photo->move(public_path() . '/images', $file);
 
-                $mealImage[] = [
+                $bookImage[] = [
                     'url' => asset('/images') . '/' . $file,
-                    'meal_id' => $this->id,
+                    'book_id' => $this->id,
                     'created_at' => $time,
                     'updated_at' => $time,
                 ];
             }
-            MealImage::insert($mealImage);
+            BookImage::insert($bookImage);
         }
         return $this;
     }
     public function removeImages(?array $photos) : self
     {
         if ($photos) {
-            $toDelete = MealImage::whereIn('id', $photos)->get();
+            $toDelete = BookImage::whereIn('id', $photos)->get();
             foreach ($toDelete as $photo) {
                 $file = public_path().'/images/' .pathinfo($photo->url, PATHINFO_FILENAME).'.'.pathinfo($photo->url, PATHINFO_EXTENSION);
                 if (file_exists($file)) {
                     unlink($file);
                 }
             }
-            MealImage::destroy($photos);
+            BookImage::destroy($photos);
         }
         return $this;
     }

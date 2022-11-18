@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MovieImage;
-use App\Http\Requests\StoreMovieImageRequest;
-use App\Http\Requests\UpdateMovieImageRequest;
+use App\Models\BookImage;
+use App\Models\Book;
+use App\Http\Requests\StoreBookImageRequest;
+use App\Http\Requests\UpdateBookImageRequest;
 
-class MovieImageController extends Controller
+class BookImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +32,10 @@ class MovieImageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreMovieImageRequest  $request
+     * @param  \App\Http\Requests\StoreBookImageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMovieImageRequest $request)
+    public function store(StoreBookImageRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class MovieImageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MovieImage  $movieImage
+     * @param  \App\Models\book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(MovieImage $movieImage)
+    public function show(Book $book)
     {
         //
     }
@@ -53,10 +54,10 @@ class MovieImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MovieImage  $movieImage
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(MovieImage $movieImage)
+    public function edit(Book $book)
     {
         //
     }
@@ -64,11 +65,11 @@ class MovieImageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateMovieImageRequest  $request
-     * @param  \App\Models\MovieImage  $movieImage
+     * @param  \App\Http\Requests\UpdatebookRequest  $request
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMovieImageRequest $request, MovieImage $movieImage)
+    public function update(UpdateBookRequest $request, Book $book)
     {
         //
     }
@@ -76,10 +77,10 @@ class MovieImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MovieImage  $movieImage
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MovieImage $movieImage)
+    public function destroy(Book $book)
     {
         //
     }

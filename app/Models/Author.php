@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Restaurant extends Model
+class Author extends Model
 {
     use HasFactory;
 
     protected $fillable = ['title'];
 
-    public function meals()
+    public function books()
     {
-        return $this->hasMany(Meal::class, 'restaurant_id', 'id');
+        return $this->hasMany(Book::class, 'author_id', 'id');
     }
 }
